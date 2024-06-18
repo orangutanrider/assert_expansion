@@ -6,8 +6,8 @@ use proc_macro::*;
 const EXPANSION_FAIL_MSG: &str = "The provided macro could not be expanded within this macro. Macros given must expand to a literal (string and number statements), due to this function relying on the expand_expr() method. It is possible that this restriction will be lifted, sometime in the distant future.";
 const FAILED_TO_GET_MACRO_GROUP_MSG: &str = "No macro group was found. It is expected that two scopes are created, first for the macro statement, second for the written expansion.";
 const FAILED_TO_GET_EXPANSION_GROUP_MSG: &str = "No expansion group was found. It is expected that two scopes are created, first for the macro statement, second for the written expansion.";
-const INCORRECT_MACRO_GROUP_DELIMITER_MSG: &str = "Macro group incorrect delimiter, parenthesis \\" + "\"" + "( ... )" + "\\" + "\" is expected.";
-const INCORRECT_EXPANSION_GROUP_DELIMITER_MSG: &str = "Expansion group incorrect delimiter, parenthesis \\" + "\"" + "( ... )" + "\\" + "\"is expected.";
+//const INCORRECT_MACRO_GROUP_DELIMITER_MSG: &str = &("Macro group incorrect delimiter, parenthesis \\".to_owned() + "\"" + "( ... )" + "\\" + "\" is expected.");
+//const INCORRECT_EXPANSION_GROUP_DELIMITER_MSG: &str = &("Expansion group incorrect delimiter, parenthesis \\".to_owned() + "\"" + "( ... )" + "\\" + "\"is expected.");
 
 const DELIMITER: Delimiter = Delimiter::Parenthesis;
 
@@ -37,10 +37,12 @@ pub fn assert_expansion(input: TokenStream) -> TokenStream {
     };
 
     if macro_group.delimiter() != DELIMITER {
-        return compile_error_stream(INCORRECT_MACRO_GROUP_DELIMITER_MSG)
+        let incorrect_macro_group_delimiter_msg: &str = &("Macro group incorrect delimiter, parenthesis \\".to_owned() + "\"" + "( ... )" + "\\" + "\" is expected.");
+        return compile_error_stream(incorrect_macro_group_delimiter_msg)
     }
     if expansion_group.delimiter() != DELIMITER {
-        return compile_error_stream(INCORRECT_EXPANSION_GROUP_DELIMITER_MSG)
+        let incorrect_expansion_group_delimiter_msg: &str = &("Expansion group incorrect delimiter, parenthesis \\".to_owned() + "\"" + "( ... )" + "\\" + "\"is expected.");
+        return compile_error_stream(incorrect_expansion_group_delimiter_msg)
     }
 
     let macro_group = macro_group.stream();
