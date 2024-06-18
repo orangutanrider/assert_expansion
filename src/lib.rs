@@ -11,6 +11,7 @@ const FAILED_TO_GET_EXPANSION_GROUP_MSG: &str = "No expansion group was found. I
 
 const DELIMITER: Delimiter = Delimiter::Parenthesis;
 
+// PSEUDOCODE
 // Get two groups
 // Expand macros within the first group
 // Get the expansion as a token stream
@@ -19,6 +20,11 @@ const DELIMITER: Delimiter = Delimiter::Parenthesis;
 // Create a panic!() if they do not
 
 #[proc_macro]
+/// Macros given have to expand to a literal.
+/// Expected use-case is having a second macro that does this conversion as a post-processing step, that is then used with this macro for automated testing purposes.
+/// 
+/// Format:
+/// assert_expansion!((macro)(expected_expansion))
 pub fn assert_expansion(input: TokenStream) -> TokenStream {
     let mut caravan = input.into_iter();
 
@@ -37,11 +43,15 @@ pub fn assert_expansion(input: TokenStream) -> TokenStream {
     };
 
     if macro_group.delimiter() != DELIMITER {
+        // INCORRECT_MACRO_GROUP_DELIMITER_MSG
         let incorrect_macro_group_delimiter_msg: &str = &("Macro group incorrect delimiter, parenthesis \\".to_owned() + "\"" + "( ... )" + "\\" + "\" is expected.");
+
         return compile_error_stream(incorrect_macro_group_delimiter_msg)
     }
     if expansion_group.delimiter() != DELIMITER {
+        // INCORRECT_EXPANSION_GROUP_DELIMITER_MSG
         let incorrect_expansion_group_delimiter_msg: &str = &("Expansion group incorrect delimiter, parenthesis \\".to_owned() + "\"" + "( ... )" + "\\" + "\"is expected.");
+
         return compile_error_stream(incorrect_expansion_group_delimiter_msg)
     }
 
