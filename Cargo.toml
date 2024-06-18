@@ -1,9 +1,14 @@
 [package]
 name = "assert_expansion"
-
+description = "A macro that expands a contained macro, to compare against a given written expansion."
 version = "0.1.0"
 authors = ["Dominic Rooney"]
 edition = "2021"
+readme = "README.md"
+repository = "https://github.com/orangutanrider/assert_expansion"
+license = "MIT OR Apache-2.0"
+keywords = ["test", "macro", "assert"]
+categories = ["development-tools::procedural-macro-helpers", "development-tools::testing"]
 
 [lib]
 proc-macro = true   
