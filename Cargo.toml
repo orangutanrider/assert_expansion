@@ -1,5 +1,5 @@
 [package]
-name = "bevy_ref_caravan"
+name = "assert_expansion"
 
 version = "0.1.0"
 authors = ["Dominic Rooney"]
@@ -7,11 +7,3 @@ edition = "2021"
 
 [lib]
 proc-macro = true   
-
-[dependencies]
-#proc-macro2 = { version = "1.0.84" }
-#quote = { version = "1.0.36" }
-
-[dev-dependencies]
-bevy_ecs = { version = "0.13.2" }
-trybuild = { version = "1.0.96" }
