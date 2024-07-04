@@ -6,7 +6,7 @@ authors = ["Dominic Rooney"]
 edition = "2021"
 readme = "README.md"
 repository = "https://github.com/orangutanrider/assert_expansion"
-license = "MIT OR Apache-2.0"
+license = "MIT"
 keywords = ["test", "macro", "assert"]
 categories = ["development-tools::procedural-macro-helpers", "development-tools::testing"]
 
