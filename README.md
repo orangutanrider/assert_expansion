@@ -6,8 +6,7 @@ pub fn main_function_like_macro(input: TokenStream) -> TokenStream {
 	Macro stuff
 }
 
-#[proc_macro]
-#[cfg(all(debug_assertions, not(feature = "no_assertions")))] // It's for tests only
+#[proc_macro] // Should only be for tests
 pub fn assertion_of_main_macro(input: TokenStream) -> TokenStream {
 	Expect two groups as input
 	Use the main macro on the first group (this can be done internally by just using it as a function)
